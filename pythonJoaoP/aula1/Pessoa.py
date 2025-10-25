@@ -10,7 +10,8 @@ class Pessoa:
     def apresentar(self):
         print(f"nome: {self.nome} sobrenome: {self.sobrenome}\nidade: {self.idade}")
 try:
-    p1 = Pessoa('','eduarda',20)
+    nome = input("informe o nome: ")
+    p1 = Pessoa(nome,'eduarda',20)
     p1.apresentar()
 except ValueError:
     print("valor errado")

@@ -6,8 +6,10 @@ class Carro:
     def exibir_informacoes(self):
         print(f"Carro da marca {self.marca} modelo {self.modelo} do ano de {self.ano}")
     def ligar(self):
-        print("O carro esta ligado!")
+        print(f"O {self.marca} esta ligado!")
 
-c1 = Carro("marcatal","modelo nsano",1979)
+c1 = Carro("Ford","Ka",2020)
+c2 = Carro("Chevrolet","Onix",2021)
 c1.exibir_informacoes()
 c1.ligar()
+c2.ligar()
