@@ -1,7 +1,8 @@
 import os
-
+import time
 
 usuarios = []
+filmes = []
 i=0
 home = 0
 home_opcao = 0
@@ -27,6 +28,7 @@ while True:
             opcao = int(input())
             if opcao >3 or opcao <1:
                 raise ValueError
+            
             elif opcao == 1:
                 if usuarios == []:
                     print("Nenhum usuário cadastrado! Crie um novo usuário.\n")
@@ -54,6 +56,7 @@ while True:
             elif opcao == 3:
                 print("Saindo...")
                 exit()
+
     except ValueError:
         print("Valor inválido! Digíte a opção corretamente\n")
     try:
@@ -61,16 +64,25 @@ while True:
             Home()
             if home_opcao == 1:
                 pass
+
             if home_opcao == 2:
                 pass
+
             if home_opcao == 3:
-                pass
+                print("Lista de usuários cadastrados:")
+                for usuario in usuarios:
+                    print(f" - {usuario['nome']}")
+                time.sleep(1.0)
+                print("\n")
+
             elif home_opcao == 4:
                 print("Fazendo logout...\n")
                 home = 0
+
             elif home_opcao == 5:
                 print("Saindo...")
                 exit()
+
             elif home_opcao >5 or home_opcao <1:
                 raise ValueError
     except ValueError:
