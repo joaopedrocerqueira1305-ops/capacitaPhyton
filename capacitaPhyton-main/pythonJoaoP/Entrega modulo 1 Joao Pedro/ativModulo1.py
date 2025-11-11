@@ -61,6 +61,7 @@ while True:
     try:
         while home == 1:
             Home()
+
             if home_opcao == 1:
                 print("-+- Adicionar um novo filme -+-")
                 titulo = str(input("título: ")).strip()
@@ -75,34 +76,36 @@ while True:
                 print("filme CASDASTRADO com sucesso! digíte 2 para avalia-lo")
 
             elif home_opcao == 2:
-                print("- _Lista de filmes do sistema_ -")
+                opcao_filme = 1
+                while opcao_filme != 0:
+                    print("- _Lista de filmes do sistema_ -")
 
-                for filme in filmes:
-                    i+=1
-                    print(f"{i} - {filme['titulo']}")
-                    print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
-                    if filme['notaGeral'] == 0:
-                        print(f"Nota -/10")
-                    else:
-                        print(f"Nota {filme['notaGeral']}/10")
-                    if filme['notaUsuarios'] == 0:
-                        print(f"Sua Nota -")
-                    else:
-                        print(f"Sua Nota {filme['notaUsuarios']}\n")
+                    for filme in filmes:
+                        i+=1
+                        print(f"{i} - {filme['titulo']}")
+                        print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
+                        if filme['notaGeral'] == 0:
+                                print(f"Nota -/10")
+                        else:
+                            print(f"Nota {filme['notaGeral']}/10")
+                        if filme['notaUsuarios'] == 0:
+                            print(f"Sua Nota -")
+                        else:
+                            print(f"Sua Nota {filme['notaUsuarios']}\n")
                                     
-                i=0
-                opcao_filme = input("Digíte o número correspndente ao filme para avalial-lo ou 'V' para voltar\n")
-                if opcao_filme == "v":
-                    continue
-                else:
+                    i=0
+                    opcao_filme = int(input("Digíte o número correspndente ao filme para avalial-lo ou '0' para voltar\n"))
+                    
                     for filme in filmes:
                         i+=1
                         if i == opcao_filme:
+                            os.system('cls' if os.name == 'nt' else 'clear') # comando para limpar a tela
+
                             print(f"{i} - {filme['titulo']}")
                             print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
-                            nota = int(input("Digíte um nota de 1 a 10"))
-                            filme['notaUsuarios'] = (nome, nota)
-                            notaGeral = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
+                            nota = int(input("Digíte um nota de 1 a 10:\n"))
+                            filme['notaUsuarios'].append((nota))
+                            filme['notaGeral'] = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
 
             elif home_opcao == 3:
                 print("Lista de usuários cadastrados:")
