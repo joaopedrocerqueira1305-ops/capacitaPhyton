@@ -104,8 +104,12 @@ while True:
                             print(f"{i} - {filme['titulo']}")
                             print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
                             nota = int(input("Digíte um nota de 1 a 10:\n"))
-                            filme['notaUsuarios'].append((nota))
-                            filme['notaGeral'] = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
+                            if 1 <= nota <=10:
+                                filme['notaUsuarios'].append((nota))
+                                filme['notaGeral'] = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
+                            else:
+                                raise ValueError
+                    i=0
 
             elif home_opcao == 3:
                 print("Lista de usuários cadastrados:")
