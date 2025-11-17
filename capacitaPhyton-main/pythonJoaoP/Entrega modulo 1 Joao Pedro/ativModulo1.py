@@ -78,37 +78,72 @@ while True:
             elif home_opcao == 2:
                 opcao_filme = 1
                 while opcao_filme != 0:
-                    print("- _Lista de filmes do sistema_ -")
-
-                    for filme in filmes:
-                        i+=1
-                        print(f"{i} - {filme['titulo']}")
+                    for idx, filme in enumerate(filmes, start=1):
+                        print(f"{idx} - {filme['titulo']}")
                         print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
                         if filme['notaGeral'] == 0:
-                                print(f"Nota -/10")
+                            print(f"Nota -/10")
                         else:
                             print(f"Nota {filme['notaGeral']}/10")
-                        if filme['notaUsuarios'] == 0:
-                            print(f"Sua Nota -")
-                        else:
-                            print(f"Sua Nota {filme['notaUsuarios']}\n")
+                        # mostra a nota do usuário logado (ou '-' se não houver)
+                        print(f"Sua Nota {filme['notaUsuarios'].get(nome, '-')}\n")
                                     
-                    i=0
                     opcao_filme = int(input("Digíte o número correspndente ao filme para avalial-lo ou '0' para voltar\n"))
                     
-                    for filme in filmes:
-                        i+=1
-                        if i == opcao_filme:
-                            os.system('cls' if os.name == 'nt' else 'clear') # comando para limpar a tela
-
-                            print(f"{i} - {filme['titulo']}")
+                    for idx, filme in enumerate(filmes, start=1):
+                        if idx == opcao_filme:
+                            os.system('cls' if os.name == 'nt' else 'clear')
+                            print(f"{idx} - {filme['titulo']}")
                             print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
-                            nota = int(input("Digíte um nota de 1 a 10:\n"))
-                            if 1 <= nota <=10:
-                                filme['notaUsuarios'].append((nota))
-                                filme['notaGeral'] = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
+                            try:
+                                nota = int(input("Digíte um nota de 1 a 10:\n"))
+                            except ValueError:
+                                print("Valor inválido! Digíte um número de 1 a 10.\n")
+                                break
+                            if 1 <= nota <= 10:
+                                # substitui/atualiza a nota do usuário atual
+                                filme['notaUsuarios'][nome] = nota
+                                # recalcula média
+                                notas = list(filme['notaUsuarios'].values())
+                                filme['notaGeral'] = sum(notas) / len(notas)
+                                print(f"Nota registrada. Nova média: {filme['notaGeral']:.1f}/10\n")
                             else:
-                                raise ValueError
+                                print("Nota fora do intervalo. Digíte entre 1 e 10.\n")
+                            break
+
+
+
+                    # print("- _Lista de filmes do sistema_ -")
+
+                    # for filme in filmes:
+                    #     i+=1
+                    #     print(f"{i} - {filme['titulo']}")
+                    #     print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
+                    #     if filme['notaGeral'] == 0:
+                    #         print(f"Nota -/10")
+                    #     else:
+                    #         print(f"Nota {filme['notaGeral']}/10")
+                    #     if filme['notaUsuarios'] == 0:
+                    #         print(f"Sua Nota -")
+                    #     else:
+                    #         print(f"Sua Nota {filme['notaUsuarios']}\n")
+                                    
+                    # i=0
+                    # opcao_filme = int(input("Digíte o número correspndente ao filme para avalial-lo ou '0' para voltar\n"))
+                    
+                    # for filme in filmes:
+                    #     i+=1
+                    #     if i == opcao_filme:
+                    #         os.system('cls' if os.name == 'nt' else 'clear') # comando para limpar a tela
+
+                    #         print(f"{i} - {filme['titulo']}")
+                    #         print(f"Ano de lançamento: {filme['data']}  ,  Gênero: {filme['genero']}")
+                    #         nota = int(input("Digíte um nota de 1 a 10:\n"))
+                    #         if 1 <= nota <=10:
+                    #             filme['notaUsuarios'].append((nota))
+                    #             filme['notaGeral'] = sum(filme['notaUsuarios']) / len(filme['notaUsuarios'])
+                    #         else:
+                    #             raise ValueError
                     i=0
 
             elif home_opcao == 3:
