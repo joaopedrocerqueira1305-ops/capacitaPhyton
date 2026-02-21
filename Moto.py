@@ -1,4 +1,1 @@
-import Veiculo
-class Moto(Veiculo):
-    def dirigir(self):
-        print(f"A moto está dirigindo.")
+# Preciso escrever a classe mot com metodo dirigir
