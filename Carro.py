@@ -2,4 +2,4 @@
 import Veiculo
 class Carro(Veiculo):
     def dirigir(self):
-        print(f"O carro está dirigindo.")
+        print(f"O carro está 
